@@ -1,9 +1,11 @@
 import streamlit as st
 import pandas as pd
 import requests
-
+import os
 # Base URL of the Flask backend inside the shared Docker network
-BACKEND_URL = "http://backend:7860"
+# BACKEND_URL = "http://backend:7860"
+
+BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:7860")
 
 # Set the title of the Streamlit app
 st.title("SuperKart Sales Prediction")
@@ -21,10 +23,6 @@ Store_Establishment_Year = st.number_input("Store_Establishment_Year", min_value
 Store_Size = st.selectbox("Store_Size", ["Small", "Medium", "Large"])
 Store_Location_City_Type = st.selectbox("Store_Location_City_Type", ["Tier 1", "Tier 2", "Tier 3"])
 Store_Type = st.selectbox("Store_Type", ["Supermarket Type1", "Supermarket Type2", "Grocery Store"])
-Product_Id_char = st.selectbox("Product_Id_char", ["FD", "NC"])
-Store_Age_Years = st.number_input("Store_Age_Years", min_value=1, value=10)
-Product_Type_Category = st.selectbox("Product_Type_Category", ["Perishables", "Non Perishables"])
-
 
 # Convert user input into a DataFrame
 input_data = pd.DataFrame({
@@ -36,10 +34,7 @@ input_data = pd.DataFrame({
     'Store_Establishment_Year': [Store_Establishment_Year],
     'Store_Size': [Store_Size],
     'Store_Location_City_Type': [Store_Location_City_Type],
-    'Store_Type': [Store_Type],
-    'Product_Id_char': [Product_Id_char],
-    'Store_Age_Years': [Store_Age_Years],
-    'Product_Type_Category': [Product_Type_Category]
+    'Store_Type': [Store_Type]
 })
 
 # Make prediction when the "Predict" button is clicked
