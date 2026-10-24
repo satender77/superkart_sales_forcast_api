@@ -24,7 +24,7 @@ def home():
 def predict_sales():
     """
     This function handles POST requests to the '/v1/predict' endpoint.
-    It expects a JSON payload containing  details and returns
+    It expects a JSON payload containing details and returns
     the predicted sales as a JSON response.
     """
     # Get the JSON data from the request body
@@ -49,11 +49,11 @@ def predict_sales():
     # Convert the extracted data into a Pandas DataFrame
     input_data = pd.DataFrame([sample])
 
-    # Make sales prediction 
-    predicted_sales = model.predict(input_data)
-   
-    # Return the sales
-    return jsonify({'Predicted Price (in dollars)': predicted_sales})
+    # Make sales prediction
+    predicted_sales = model.predict(input_data).tolist()
+
+    # Return the sales matched to frontend requirements ("Predicted Sales (in dollars)")
+    return jsonify({'Predicted Sales (in dollars)': predicted_sales[0]})
 
 # Define an endpoint for batch prediction (POST request)
 @superkart_sales_forcast_api.post('/v1/predictbatch')
@@ -73,8 +73,8 @@ def predict_sales_batch():
     predicted_sales = model.predict(input_data).tolist()
 
     # Create a dictionary of predictions with product IDs as keys
-    product_Ids = input_data['Product_Id'].tolist()  
-    output_dict = dict(zip(product_Ids, predicted_sales))  
+    product_Ids = input_data['Product_Id'].tolist()
+    output_dict = dict(zip(product_Ids, predicted_sales))
 
     # Return the predictions dictionary as a JSON response
     return output_dict
