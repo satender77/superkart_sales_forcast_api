@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import requests
 
-# Base URL of the Flask backend
+# Base URL of the Flask backend inside the shared Docker network
 BACKEND_URL = "http://backend:7860"
 
 # Set the title of the Streamlit app
