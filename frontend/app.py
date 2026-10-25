@@ -17,24 +17,25 @@ st.subheader("Online Prediction")
 Product_Weight = st.number_input("Product Weight", min_value=2, value=25)
 Product_Sugar_Content = st.selectbox("Product Sugar Content", ["low sugar", "regular","no sugar"])
 Product_Allocated_Area = st.number_input("Product_Allocated_Area", min_value=0.004, value=0.4)
-Product_Type = st.selectbox("Product_Type", ["Fruits and Vegetables", "Snack Foods","Frozen Foods","Dairy","Household","Baking Goods","Canned","Health and Hygiene","Meat","Soft Drinks","Breads","Hard Drinks","Others","Starchy Foods","Breakfast","Seafood"])
 Product_MRP = st.number_input("Product_MRP",min_value=10, value=300 )
-Store_Establishment_Year = st.number_input("Store_Establishment_Year", min_value=1990, value=2020)
 Store_Size = st.selectbox("Store_Size", ["Small", "Medium", "Large"])
 Store_Location_City_Type = st.selectbox("Store_Location_City_Type", ["Tier 1", "Tier 2", "Tier 3"])
 Store_Type = st.selectbox("Store_Type", ["Supermarket Type1", "Supermarket Type2", "Grocery Store"])
-
+Product_Id_char = st.selectbox("Product_Id_char", ["FD", "NC", "DR"])
+Store_Age_Years = st.number_input("Store_Age_Years", min_value=10, value=20)
+Product_Type_Category = st.selectbox("Product_Type_Category", ["Perishables", "Non Perishables"])
 # Convert user input into a DataFrame
 input_data = pd.DataFrame({
     'Product_Weight': [Product_Weight],
     'Product_Sugar_Content': [Product_Sugar_Content],
     'Product_Allocated_Area': [Product_Allocated_Area],
-    'Product_Type': [Product_Type],
     'Product_MRP': [Product_MRP],
-    'Store_Establishment_Year': [Store_Establishment_Year],
     'Store_Size': [Store_Size],
     'Store_Location_City_Type': [Store_Location_City_Type],
-    'Store_Type': [Store_Type]
+    'Store_Type': [Store_Type],
+    'Product_Id_char': [Product_Id_char],
+    'Store_Age_Years': [Store_Age_Years],
+    'Product_Type_Category': [Product_Type_Category]
 })
 
 # Make prediction when the "Predict" button is clicked
